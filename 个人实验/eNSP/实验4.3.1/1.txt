@@ -1,0 +1,35 @@
+system-view
+sysname LSW2
+vlan batch 80 81 12
+
+interface gigabitethernet 0/0/9
+port link-type access
+port default vlan 80
+quit
+
+interface gigabitethernet 0/0/13
+port link-type access
+port default vlan 81
+quit
+
+interface gigabitethernet 0/0/24
+port link-type trunk
+port trunk allow-pass vlan 80 81 12
+port trunk allow-pass vlan all
+quit
+
+display vlan
+display port vlan
+
+interface vlanif 80
+ip address 192.168.80.1 24
+quit
+interface vlanif 81
+ip address 192.168.81.1 24
+quit
+interface vlanif 12
+ip address 192.168.12.2 24
+quit
+
+display interface brief
+display ip interface brief

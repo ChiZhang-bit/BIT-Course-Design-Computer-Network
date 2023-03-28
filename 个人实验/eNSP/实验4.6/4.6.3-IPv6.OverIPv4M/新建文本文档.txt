@@ -1,0 +1,179 @@
+system-view
+sysname RTB
+ipv6
+interface gigabitethernet 0/0/2
+ipv6 enable
+ipv6 address 2002:1::A 64
+ipv6 address auto link-local
+display this ipv6 interface
+quit
+interface gigabitethernet 0/0/0
+ipv6 enable
+ipv6 address 2400:6400:000E:0002::1 64
+display this ipv6 interface
+quit
+
+
+
+system-view
+sysname RTC
+ipv6
+interface gigabitethernet 0/0/0
+ipv6 enable
+ipv6 address 2400:6400:000E:0001::2 64
+display this ipv6 interface
+quit
+interface gigabitethernet 0/0/1
+ipv6 enable
+ipv6 address 2400:6400:000E:0002::2 64
+display this ipv6 interface
+quit
+interface gigabitethernet 0/0/2
+ip address 10.2.10.1 24
+quit
+
+
+
+
+system-view
+sysname RTW
+ipv6
+interface gigabitethernet 0/0/2
+ipv6 enable
+ipv6 address 2005:1::A 64
+ipv6 address auto link-local
+display this ipv6 interface
+quit
+interface gigabitethernet 0/0/1
+ip address 10.5.10.1 24
+quit
+
+
+system-view
+sysname RTH
+interface gigabitethernet 0/0/2
+ip address 10.2.10.2 24
+quit
+interface gigabitethernet 0/0/1
+ip address 10.5.10.2 24
+quit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+system-view
+ripng 1
+quit
+interface gigabitethernet 0/0/0
+ripng 1 enable
+quit
+interface gigabitethernet 0/0/2
+ripng 1 enable
+quit
+ipv6 route-static 2005:1::0 64 2400:6400:000E:0001::2
+display ipv6 routing-table
+
+
+
+
+
+
+
+B
+
+system-view
+ripng 1
+quit
+interface gigabitethernet 0/0/0
+ripng 1 enable
+quit
+interface gigabitethernet 0/0/2
+ripng 1 enable
+quit
+ipv6 route-static 2005:1::0 64 2400:6400:000E:0002::2
+display ipv6 routing-table
+
+
+C
+
+system-view
+ripng 1
+quit
+interface gigabitethernet 0/0/0
+ripng 1 enable
+quit
+interface gigabitethernet 0/0/1
+ripng 1 enable
+quit
+ipv6 route-static 2005:1::0 64 2400:6400:000E:0010::50
+ip route-static 10.5.10.0. 255.255.255.0 10.2.10.2
+display ipv6 routing-table
+display ip routing-table
+
+
+W
+system-view
+ripng 1
+quit
+interface gigabitethernet 0/0/2
+ripng 1 enable
+quit
+ipv6 route-static 2001:1::0 64 2400:6400:000E:0010::10
+ipv6 route-static 2002:1::0 64 2400:6400:000E:0010::10
+ip route-static 10.2.10.0 255.255.255.0 10.5.10.2
+display ipv6 routing-table
+display ip routing-table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+W - tunnel
+system-view
+interface tunnel 0/0/1
+tunnel-protocol ipv6-ipv4
+ipv6 enable
+ipv6 address 2400:6400:000E:0010::50 64
+display this ipv6 interface
+source 10.5.10.1
+source gigabitethernet 0/0/1
+destination 10.2.10.1
+display this interface
+quit
+
+
+
+
+
+
+

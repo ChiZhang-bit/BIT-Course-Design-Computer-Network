@@ -1,0 +1,3 @@
+[code-runner]
+    command = 'cd'
+    args = ['${fileDirname} && python3  ${file}']
